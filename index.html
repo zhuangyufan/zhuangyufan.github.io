@@ -1,5 +1,279 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>我的主页</title></head>
-<body><h1>你好</h1><p>这是我的个人网页。</p></body>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yufan Zhuang</title>
+<meta name="description" content="Yufan Zhuang (庄宇凡) — Ph.D. student at HKUST ECE working on wireless systems, real-time communications, and embedded systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #000000;
+    --muted: #828282;
+    --theme: #b509ac;
+    --divider: rgba(0, 0, 0, 0.1);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1d;
+      --text: #e8e8e8;
+      --muted: #92979d;
+      --theme: #2698ba;
+      --divider: rgba(255, 255, 255, 0.12);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Roboto", -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--theme); text-decoration: none; }
+  a:hover { color: var(--theme); text-decoration: underline; }
+  p { margin-bottom: 1rem; }
+
+  main {
+    max-width: 930px;
+    margin: 0 auto;
+    padding: 48px 24px 30px;
+  }
+
+  .post-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  .post-title .zh {
+    font-size: 1.8rem;
+    margin-left: 12px;
+    color: var(--muted);
+  }
+  .desc {
+    color: var(--muted);
+    margin: 6px 0 28px;
+  }
+
+  /* Profile photo floated left, al-folio style */
+  .profile {
+    float: left;
+    width: 30%;
+    max-width: 270px;
+    margin: 4px 1.5rem 1rem 0;
+    text-align: center;
+  }
+  .profile img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+  .profile .more-info {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* Social icons */
+  .social {
+    clear: both;
+    text-align: center;
+    padding: 10px 0 4px;
+  }
+  .social a {
+    color: var(--text);
+    margin: 0 14px;
+    display: inline-block;
+  }
+  .social a:hover { color: var(--theme); }
+  .social svg { width: 30px; height: 30px; fill: currentColor; vertical-align: middle; }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 38px 0 18px;
+    clear: both;
+  }
+
+  /* Projects */
+  .project { margin-bottom: 24px; }
+  .project .title { font-weight: 500; }
+  .project .meta {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin: 1px 0 5px;
+  }
+  .project p { margin-bottom: 6px; }
+  .project ul {
+    margin: 4px 0 0;
+    padding-left: 1.2rem;
+  }
+  .project li { margin-bottom: 3px; }
+
+  /* Publications */
+  .publications ol { list-style: none; }
+  .publications li { margin-bottom: 1.4rem; }
+  .publications .title { font-weight: 500; }
+  .publications .title a { color: var(--text); }
+  .publications .title a:hover { color: var(--theme); }
+  .publications .author b { font-weight: 500; }
+  .publications .periodical {
+    font-style: italic;
+    color: var(--muted);
+  }
+  .pub-links { margin-top: 6px; }
+  .pub-links a {
+    display: inline-block;
+    color: var(--muted);
+    border: 1px solid var(--muted);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 2px 10px;
+    margin-right: 6px;
+  }
+  .pub-links a:hover {
+    background: var(--theme);
+    border-color: var(--theme);
+    color: #fff;
+    text-decoration: none;
+  }
+  .eq-note { font-size: 0.875rem; color: var(--muted); }
+
+  footer {
+    max-width: 930px;
+    margin: 0 auto;
+    padding: 20px 24px 30px;
+    border-top: 1px solid var(--divider);
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 620px) {
+    .post-title { font-size: 2rem; }
+    .post-title .zh { font-size: 1.4rem; margin-left: 8px; }
+    .profile {
+      float: none;
+      margin: 0 auto 20px;
+      width: 200px;
+      max-width: none;
+    }
+    h2 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <header class="post-header">
+    <h1 class="post-title">Yufan Zhuang</h1>
+    <p class="desc">Ph.D. candidate @ HKUST</p>
+  </header>
+
+  <article>
+    <div class="profile">
+      <img src="portrait.jpg" alt="Portrait of Yufan Zhuang">
+      <div class="more-info">
+        yufan.zhuang@connect.ust.hk<br>
+        HKUST, Hong Kong SAR, China
+      </div>
+    </div>
+
+    <p>I am a Ph.D. candidate in the Department of Electronic and Computer Engineering at the <a href="https://hkust.edu.hk/" rel="external nofollow noopener" target="_blank">Hong Kong University of Science and Technology (HKUST)</a>, working under the guidance of <a href="https://eejzhang.people.ust.hk/" rel="external nofollow noopener" target="_blank">Prof. Jun Zhang</a>. I am also fortunate to work closely with <a href="https://zilimeng.com/" rel="external nofollow noopener" target="_blank">Prof. Zili Meng</a>. Prior to that, I received my Bachelor&rsquo;s degree in Communication Engineering from the <a href="https://www.sustech.edu.cn/en/" rel="external nofollow noopener" target="_blank">Southern University of Science and Technology (SUSTech)</a> in 2023, under the supervision of <a href="https://eee.sustech.edu.cn/p/wangrui/" rel="external nofollow noopener" target="_blank">Prof. Rui Wang</a>.</p>
+
+    <p>My research focuses on <strong>wireless communication systems</strong> (5G/Wi-Fi), <strong>real-time audio/video communications</strong> (RTC), and <strong>embedded network stacks</strong>. I build and validate real-world systems, with a cross-layer perspective spanning the wireless physical layer, protocol stacks, and applications.</p>
+
+    <p><strong>I am on track to complete my Ph.D. in August 2027 and am currently looking for job opportunities.</strong> If my experience in wireless systems, RTC, or embedded development matches what your team is looking for, or if you would like to exchange ideas and explore potential collaborations, please don&rsquo;t hesitate to drop me an <a href="mailto:yufan.zhuang@connect.ust.hk">email</a>.</p>
+
+    <div class="social">
+      <a href="mailto:yufan.zhuang@connect.ust.hk" title="Email" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.51l-8 5.33-8-5.33V6h16zM4 18V8.92l7.45 4.97a1 1 0 0 0 1.1 0L20 8.92V18H4z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/yufan-zhuang-b2b086310/" title="LinkedIn" aria-label="LinkedIn" rel="external nofollow noopener" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.75H5.67v8.59h2.67zM7 8.58a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9.76v-4.71c0-2.52-1.34-3.69-3.14-3.69-1.45 0-2.1.8-2.46 1.36V9.75h-2.67c.04.75 0 8.59 0 8.59h2.67v-4.8c0-.26.02-.51.1-.7.19-.48.63-.98 1.37-.98.96 0 1.35.74 1.35 1.81v4.67h2.78z"/></svg>
+      </a>
+    </div>
+
+    <h2>Selected Projects</h2>
+
+    <div class="project">
+      <div class="title">Low-Latency Real-Time Video Streaming over 5G</div>
+      <ul>
+        <li>Built an srsRAN-based end-to-end 5G system (5GC, gNB, and UE), carrying a WebRTC-based live streaming system with 1080p/30&nbsp;FPS video.</li>
+        <li>Proposed a physical-layer-assisted congestion-control mechanism that achieves 99.9th-percentile latency below 100&nbsp;ms over fluctuating wireless networks.</li>
+        <li>The resulting <a href="https://arxiv.org/pdf/2604.22383" rel="external nofollow noopener" target="_blank">paper</a> is accepted by <i>IEEE TMC</i>.</li>
+        <li>Part of the Hong Kong Areas of Excellence (AoE) scheme <a href="https://6g-aoe.hkust.edu.hk/" rel="external nofollow noopener" target="_blank">6G@HK</a>.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="title">Embedded Network Stack and SPI Link-Layer Optimization for Smart Glasses</div>
+      <ul>
+        <li>Built an AI glasses prototype with STM32, ESP32, and Zephyr OS, supporting camera, display, and Wi-Fi.</li>
+        <li>Proposed SPI full-duplex communication and retransmission mechanisms that cut interaction latency by up to 50%.</li>
+        <li>Achieved real-time interaction latency around 60&nbsp;ms.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="title">xg.glass: Cross-Platform SDK for AI Glasses</div>
+      <ul>
+        <li>Designed a unified SDK enabling applications to be developed once and deployed across Rokid, RayNeo, Meta, and INMO smart glasses.</li>
+        <li>Developed sample apps including a teleprompter and real-time translation.</li>
+        <li>The demos received media coverage from CNN, QbitAI, and Vista Story.</li>
+        <li>Presented as a <a href="https://zilimeng.com/papers/xgglass-hotmobile26.pdf" rel="external nofollow noopener" target="_blank">poster</a> at <i>ACM HotMobile 2026</i> with a live demo.</li>
+      </ul>
+      <div class="pub-links"><a href="https://xg.glass/" rel="external nofollow noopener" target="_blank">Project Homepage</a> <a href="https://github.com/hkust-spark/xg-glass-sdk" rel="external nofollow noopener" target="_blank">GitHub</a></div>
+    </div>
+
+    <h2>Selected Publications</h2>
+
+    <div class="publications">
+      <ol>
+        <li>
+          <div class="title"><a href="https://arxiv.org/pdf/2604.22383" rel="external nofollow noopener" target="_blank">Physical-Layer Assisted Congestion Control for Real-Time Communications</a></div>
+          <div class="author"><b>Yufan Zhuang</b>, Zili Meng, Zehong Lin, and Jun Zhang</div>
+          <div class="periodical">IEEE Transactions on Mobile Computing (TMC), 2026</div>
+        </li>
+        <li>
+          <div class="title"><a href="https://www.usenix.org/system/files/nsdi26-meng.pdf" rel="external nofollow noopener" target="_blank">MAE: More Adaptive Video Encoder for Consistent Low Latency in High-Quality Real-Time Communication</a></div>
+          <div class="author">Hua Meng, <b>Yufan Zhuang</b>, Yasna Noushirvani, Xiangjie Huang, and Zili Meng</div>
+          <div class="periodical">In USENIX Symposium on Networked Systems Design and Implementation (NSDI), 2026</div>
+        </li>
+        <li>
+          <div class="title"><a href="https://zilimeng.com/papers/xgglass-hotmobile26.pdf" rel="external nofollow noopener" target="_blank">xg.glass: Develop AI Glasses Applications in 10 Lines of Code and Easily Deploy onto Different Glasses</a></div>
+          <div class="author">Jiayang Xu*, <b>Yufan Zhuang*</b>, Zijie Li, Jun Zhang, and Zili Meng</div>
+          <div class="periodical">In International Workshop on Mobile Computing Systems and Applications (HotMobile), 2026</div>
+        </li>
+        <li>
+          <div class="title"><a href="https://arxiv.org/pdf/2601.07518" rel="external nofollow noopener" target="_blank">Mon3tr: Monocular 3D Telepresence with Pre-built Gaussian Avatars as Amortization</a></div>
+          <div class="author">Fangyu Lin, Yingdong Hu, Zhening Liu, <b>Yufan Zhuang</b>, Zehong Lin, and Jun Zhang</div>
+          <div class="periodical">IEEE Transactions on Mobile Computing (TMC), under minor revision</div>
+        </li>
+        <li>
+          <div class="title"><a href="https://arxiv.org/pdf/2306.07669" rel="external nofollow noopener" target="_blank">Rate-Splitting with Hybrid Messages: DoF Analysis of Two-User MIMO Broadcast Channel with Imperfect CSIT</a></div>
+          <div class="author">Tong Zhang, <b>Yufan Zhuang</b>, Gaojie Chen, Pei Xiao, Na Li, and Rui Wang</div>
+          <div class="periodical">IEEE Transactions on Wireless Communications (TWC), 2024</div>
+        </li>
+      </ol>
+      <p class="eq-note">* Equal contribution.</p>
+    </div>
+  </article>
+</main>
+
+<footer>© Copyright 2026 Yufan Zhuang. Last updated: July 2026.</footer>
+
+</body>
 </html>
